@@ -43,6 +43,19 @@ class Client
      */
     private $dateNaiCli;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="login", type="string", length=255)
+     */
+    private $login;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255)
+     */
+    private $password;
 
     /**
      * Set idCli
@@ -131,6 +144,24 @@ class Client
     }
 
     /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param \string $password
+     *
+     * @return Client
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    /**
      * Get dateNaiCli
      *
      * @return \DateTime
@@ -139,5 +170,27 @@ class Client
     {
         return $this->dateNaiCli;
     }
+
+    /**
+     * @return string
+     */
+    public function getLogin()
+    {
+        return $this->login;
+    }
+
+    /**
+     * @param string $login
+     *
+     * @return Client
+     */
+    public function setLogin($login)
+    {
+        $this->login = $login;
+    }
+
+
+
+
 }
 
