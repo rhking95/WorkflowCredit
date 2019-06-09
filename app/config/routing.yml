@@ -1,6 +1,6 @@
 client:
     resource: "@ClientBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /client
 
 app:
     resource: '@AppBundle/Controller/'
