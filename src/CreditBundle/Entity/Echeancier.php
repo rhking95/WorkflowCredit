@@ -27,7 +27,29 @@ class Echeancier
      *
      * @ORM\Column(name="TotaleEcheaance", type="float")
      */
+    private $idCredit;
+    /**
+     * @ORM\ManyToOne(targetEntity="Credit")
+     * @ORM\JoinColumn(name="IdCredit",referencedColumnName="idCredit")
+     */
+
     private $totaleEcheaance;
+
+    /**
+     * @return float
+     */
+    public function getIdCredit()
+    {
+        return $this->idCredit;
+    }
+
+    /**
+     * @param float $idCredit
+     */
+    public function setIdCredit($idCredit)
+    {
+        $this->idCredit = $idCredit;
+    }
 
     /**
      * @var float
@@ -263,5 +285,7 @@ class Echeancier
     {
         return $this->payeEchenace;
     }
+
+
 }
 
