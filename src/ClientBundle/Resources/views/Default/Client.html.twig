@@ -1,1 +1,61 @@
-hello world !
+<head>
+<title>Creation Client</title>
+
+
+</head>
+<body>
+<table width="80%" height = "80%">
+    <tr>
+        <td align="center">
+            <h1 align=> Creation Client</h1>
+            {{ form_start(form)}}
+            <table>
+            <tr>
+                <td>Nom</td>
+                <td>{{ form_widget(form.nomCli) }}</td>
+            </tr>
+            <tr>
+                <td>Prenom</td>
+                <td>{{ form_widget(form.prenomCli) }}</td>
+            </tr>
+            <tr>
+                <td>Date Naissace</td>
+                <td>{{ form_widget(form.dateNaiCli) }}</td>
+            </tr>
+            <tr>
+                <td>Login</td>
+                <td>{{ form_widget(form.login) }}</td>
+                <td>{{error1}}</td>
+            </tr>
+            <tr>
+                <td>Passowrd</td>
+                 <td>{{ form_widget(form.password) }}</td>
+            </tr>
+            <tr>
+                <td>Confirmation Password</td>
+                <td><input type="password" name="confpas"></td>
+                <td>{{ error2 }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Creation"></td>
+            </tr>
+     </table>
+    {{ form_end(form)}}
+     </td>
+     <td align="center">
+         <h1>Se Connecter</h1>
+            <table>
+                <tr>
+                    <td> Login</td>
+                    <td><input type="text" name="log"></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" name="pas"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+</body>
