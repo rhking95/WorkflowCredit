@@ -30,10 +30,10 @@ class Credit
     private $typeCredit;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="MontantCredit", type="float")
+     * @ORM\ManyToOne(targetEntity="Produit")
+     * @ORM\JoinColumn(name="typeCredit",referencedColumnName="IdProduit")
      */
+
     private $montantCredit;
 
     /**
