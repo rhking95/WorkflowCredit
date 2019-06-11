@@ -13,7 +13,15 @@ class CreditType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('typeCredit')->add('dureeCredit')->add('interetCredit')->add('DateCreationCredit')->add('montantCredit');
+        $builder->add('typeCredit',EntityType::class,
+            array(
+                'class' => 'CreditBundle\Entity\Produit',
+                'choice_label' => 'idProduit',
+                'multiple' => false))
+            ->add('dureeCredit')
+            ->add('interetCredit')
+            ->add('DateCreationCredit')
+            ->add('montantCredit');
     }/**
      * {@inheritdoc}
      */

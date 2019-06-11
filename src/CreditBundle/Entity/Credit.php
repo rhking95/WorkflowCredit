@@ -34,6 +34,40 @@ class Credit
      * @ORM\JoinColumn(name="typeCredit",referencedColumnName="IdProduit")
      */
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="idClient", type="integer")
+     */
+    private $idClient;
+
+    /**
+     * @return int
+     */
+    public function getIdClient()
+    {
+        return $this->idClient;
+    }
+
+    /**
+     * @param int $idClient
+     */
+    public function setIdClient($idClient)
+    {
+        $this->idClient = $idClient;
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Client")
+     * @ORM\JoinColumn(name="idClient",referencedColumnName="idClient")
+     */
+
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="MontantCredit", type="float")
+     */
     private $montantCredit;
 
     /**

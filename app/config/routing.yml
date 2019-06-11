@@ -1,6 +1,6 @@
 credit:
     resource: "@CreditBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /credit
 
 client:
     resource: "@ClientBundle/Resources/config/routing.yml"
