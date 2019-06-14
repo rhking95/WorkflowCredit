@@ -5,3 +5,7 @@ client_homepage:
 Add_Client:
     path:     /add
     defaults: { _controller: ClientBundle:Default:add }
+
+Connect_Client:
+    path:     /connect
+    defaults: { _controller: ClientBundle:connect:connect }
