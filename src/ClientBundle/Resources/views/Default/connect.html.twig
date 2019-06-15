@@ -1,23 +1,22 @@
-<head>
-    <title>Connect</title>
+{% extends "baseConnect.html.twig" %}
 
+{% block title %}Espace d'authentification{% endblock %}
 
-</head>
-<body>
-<td align="center">
-    <h1>Se Connecter</h1>
-    <table>
-        <tr>
-            <td> Login</td>
-            <td><input type="text" name="log"></td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td><input type="password" name="pas"></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="Connect"></td>
-        </tr>
-    </table>
-</td>
-</body>
+{% block theme %}
+    <link href="{{ asset('templateIMG/lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"/>
+
+    <script src="{{ asset('templateIMG/lib/prettyphoto/js/prettyphoto.js') }}"></script>
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div align="center">
+                <img src="{{ asset('templateIMG/img/workInProgress.png') }}" class="img-responsive" alt="">
+            </div>
+        </div>
+        <!--/row-->
+    </div>
+{% endblock %}
+
