@@ -32,6 +32,52 @@ class Produit
     /**
      * @var float
      *
+     * @ORM\Column(name="MantantProdMax", type="float")
+     */
+    private $mantantProdMax;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="MantantProdMin", type="float")
+     */
+    private $mantantProdMin;
+
+    /**
+     * @return float
+     */
+    public function getMantantProdMax()
+    {
+        return $this->mantantProdMax;
+    }
+
+    /**
+     * @param float $mantantProdMax
+     */
+    public function setMantantProdMax($mantantProdMax)
+    {
+        $this->mantantProdMax = $mantantProdMax;
+    }
+
+    /**
+     * @return float
+     */
+    public function getMantantProdMin()
+    {
+        return $this->mantantProdMin;
+    }
+
+    /**
+     * @param float $mantantProdMin
+     */
+    public function setMantantProdMin($mantantProdMin)
+    {
+        $this->mantantProdMin = $mantantProdMin;
+    }
+
+    /**
+     * @var float
+     *
      * @ORM\Column(name="TauxIntProdMax", type="float")
      */
     private $tauxIntProdMax;
