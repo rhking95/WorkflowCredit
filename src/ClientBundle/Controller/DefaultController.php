@@ -15,24 +15,45 @@ class DefaultController extends Controller
     }
 
 
-    /**
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function addAction(Request $request)
+    public function addAction(Request  $req)
     {
         $cli = new Client();
         $form = $this -> createForm(ClientType::class,$cli);
-        $form = $form->handleRequest($request);
-
+        $form = $form->handleRequest($req);
+        $error1="";
+        $error2="";
         if ($form->isValid()){
+            $clients = $this->getDoctrine()->getRepository
+            (Client::class)->findAll();
+            foreach ($clients as &$x){
+                $client = new Client();
+                $client = $x;
+                if ($client->getLogin() == $cli->getLogin()){
+                    $error1 = "Login deja existe";
+                }
+            }
 
-            $form = $form->createView();
-            return $this->render('@Client/Default/connect.html.twig',array('form'=>$form));
+            $pas = $req->get('confpas');
+            if ($pas != $cli->getPassword()){
+                $error2= 'Veuillez verifier le password';
+            }
+
+            if($error1 == "" and $error2 == ""){
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($cli);
+                $em->flush();
+                $form = $form->createView();
+                return $this->render('@Client/Default/connect.html.twig');
+
+            }else{
+                $form = $form->createView();
+                return $this->render('@Client/Default/client.html.twig',array('form'=>$form,'error1'=>$error1,'error2'=>$error2));
+            }
+
 
         }
         $form = $form->createView();
-        return $this->render('@Client/Default/Client.html.twig',array('form'=>$form));
+        return $this->render('@Client/Default/Client.html.twig',array('form'=>$form,'error1'=>$error1,'error2'=>$error2));
 
 
     }

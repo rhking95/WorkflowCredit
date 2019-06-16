@@ -6,7 +6,6 @@
 
     </head>
     <body>
-    <form name="f" action="{{ path('Add_Client') }}">
         {{ form_start(form)}}
     <table width="100%" height = "80%">
         <tr>
@@ -40,6 +39,10 @@
                         </div>
                     </tr>
                     <tr>
+                        <td></td>
+                        <td><font color="red"> {{ error1 }}</font></td>
+                    </tr>
+                    <tr>
                         <div class="form-group">
                             <td> <label>mot de passe</label></td>
                             <td>{{ form_widget(form.password,{ 'attr': {'class': 'form-control','placeholder':'Mot de passe'} }) }}</td>
@@ -52,6 +55,10 @@
                         </div>
                     </tr>
                     <tr>
+                        <td></td>
+                        <td><font color="red"> {{ error2 }}</font></td>
+                    </tr>
+                    <tr>
                         <td colspan="2">
                             {{ form_widget(form.Valider,{ 'attr': {'class': 'btn btn-primary','value':'Valider'} }) }}
                         </td>
@@ -62,6 +69,5 @@
     </table>
         {{ form_end(form)}}
 
-    </form>
     </body>
 {% endblock %}
