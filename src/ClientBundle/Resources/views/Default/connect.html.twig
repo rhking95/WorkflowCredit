@@ -2,21 +2,86 @@
 
 {% block title %}Espace d'authentification{% endblock %}
 
-{% block theme %}
-    <link href="{{ asset('templateIMG/lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"/>
-
-    <script src="{{ asset('templateIMG/lib/prettyphoto/js/prettyphoto.js') }}"></script>
-
-{% endblock %}
-
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div align="center">
-                <img src="{{ asset('templateIMG/img/workInProgress.png') }}" class="img-responsive" alt="">
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <div class="container" align="center">
+            <img src="{{ asset('templateIMG/img/workInProgress.png') }}" class="img-responsive" alt="">
+        </div>
+
+        <ol class="breadcrumb">
+            <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+            <li class="active">Acceuil</li>
+        </ol>
+
+        <div class="col-lg-12">
+            <h2>Aperçu sur nos crédits :</h2>
+        </div>
+
+
+
+        <div class="col-md-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    Crédit immobilier
+                </div>
+                <div class="panel-body">
+                    <p>Le crédit immobilier concerne le plus souvent un logement (prêt habitat),
+                        utilisé par le propriétaire soit pour sa résidence principale ou secondaire,
+                        soit pour le louer à un tiers.
+                        Dans le cas d'un investissement locatif,
+                        il est possible de déduire les intérêts d'emprunt [archive] des revenus fonciers .
+                    </p>
+                </div>
             </div>
         </div>
-        <!--/row-->
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Crédit étudiant
+                </div>
+                <div class="panel-body">
+                    <p>Le prêt étudiant est un crédit à la consommation qui vous est accordé pour financer vos études.
+                        Il peut faire l'objet d'un remboursement différé,
+                        ce qui vous permet de ne commencer à rembourser qu'une fois vos études terminées.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    Crédit startup
+                </div>
+                <div class="panel-body">
+                    <p>Vous cherchez entreprendre ou à développer une start-up dans la haute technologie ou l’économie numérique ?
+                        Le montant du crédit peut aller jusqu'au 90% du coût de l'investissement,
+                        y compris le fonds de roulement et les investissements immatériels.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    Crédit de consommation
+                </div>
+                <div class="panel-body">
+                    <p>
+                        Le crédit à la consommation est la catégorie de crédit accordée à des particuliers par des banques
+                        ou des sociétés financières pour financer les achats de biens et services,
+                        comme les grosses dépenses en biens d'équipement (automobile, équipement de la maison).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <ol class="breadcrumb">
+            <li><a href="#"><svg class="glyph stroked email"><use xlink:href="#stroked-email"></use></svg></a></li>
+            <li class="active">Nous contacter :</li>
+        </ol>
+            <h2></h2>
     </div>
 {% endblock %}
 
