@@ -1,64 +1,160 @@
-{% extends "baseConnect.html.twig" %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crédit</title>
 
-{% block title %}Nos crédits{% endblock %}
+    <link href="{{ asset('templates/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('templates/css/datepicker3.css') }}" rel="stylesheet">
+    <link href="{{ asset('templates/css/styles.css') }}" rel="stylesheet">
 
-{% block content %}
+    <!--Icons-->
+    <script src="{{ asset('templates/js/jquery-3.4.1.min.js')}}"></script>
+
+    <script type="text/javascript">
+        jQuery(function($) {
+            $('#simuler').click(function (e) {
+                if ($("#produit option:selected").val() == -1) {
+                    $("#error_produit").text($("#error_produit").val().replace('', 'Veuillez choisir le type de crédit'));
+                } else {
+                    $("#error_produit").text($("#error_produit").val().replace('Veuillez choisir le type de crédit', ''));
+                }
+                if ($("#methode_calcule option:selected").val() == -1) {
+                    $("#error_methode_calcule").text($("#error_methode_calcule").val().replace('', 'Veuillez choisir la methode de calcule'));
+                } else {
+                    $("#error_methode_calcule").text($("#error_methode_calcule").val().replace('Veuillez choisir la methode de calcule', ''));
+                }
+                if ($("#produit option:selected").val() != -1 && $("#methode_calcule option:selected").val() != -1) $(".panel").css('visibility', 'visible');
+                if ($("#methode_calcule option:selected").val() == 1) {
+                    $("#valeur_credit").prop('disabled', true);
+                    $("#duree_credit").prop('disabled', false);
+                    $("#montant_echeance").prop('disabled', false);
+                }
+                if ($("#methode_calcule option:selected").val() == 2) {
+                    $("#valeur_credit").prop('disabled', false);
+                    $("#duree_credit").prop('disabled', true);
+                    $("#montant_echeance").prop('disabled', false);
+                }
+                if ($("#methode_calcule option:selected").val() == 3) {
+                    $("#valeur_credit").prop('disabled', false);
+                    $("#duree_credit").prop('disabled', false);
+                    $("#montant_echeance").prop('disabled', true);
+                }
+                {% for p in produit %}
+                if ($("#produit option:selected").val()=={{ p.IdProduit }})
+                    $("#error_valeur_credit").text($("#error_valeur_credit").val().replace('', 'La valeur de crédit doit être entre ' +{{ p.MantantProdMax}} +' et '+ {{ p.MantantProdMin}}));
+                $("#error_duree_credit").text($("#error_duree_credit").val().replace('', 'La duree de crédit doit être entre ' +{{ p.DureeProdMax}} +' et '+ {{ p.DureeProdMin}}));
+                $("#error_taux_interet").text($("#error_taux_interet").val().replace('', 'Le taux d\'intérêt de crédit doit être entre ' +{{ p.TauxIntProdMax}} +' et '+ {{ p.TauxIntProdMin}}));
+                {% endfor %}
 
 
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
-        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-            <div class="login-panel panel panel-default">
-                <div class="panel-heading">Simuler un crédit</div>
-                <div class="panel-body">
-                    <table>
-                        <tr>
-                            <td width="50%">
-                                <label>Type de crédit</label>
-                            </td>
-                            <td width="50%">
-                                <select class="form-control">
-                                    <option>Crédit immobilier</option>
-                                    <option>Crédit étudiant</option>
-                                    <option>Crédit startup</option>
-                                    <option>Crédit consommation</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="50%">
-                                <label>Taux d'intérêt</label>
-                            </td>
-                            <td width="50%">
-                                <input class="form-control" placeholder="Selon type de crédit" readonly>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="50%">
-                                <label>Durée du crédit</label>
-                            </td>
-                            <td width="50%">
-                                <input class="form-control" placeholder="Durée en mois" type="number">
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="panel-footer">
-                    <table>
-                        <tr>
-                            <td width="50%">
-                                <a class="btn btn-primary">Simuler</a>
-                            </td>
-                            <td width="50%">
-                                <input class="form-control" placeholder="Résultat : Dt/Mois" readonly>
-                            </td>
-                        </tr>
-                    </table>
+        <div class="col-lg-12">
+            <h1 class="page-header">Demande de crédit</h1>
+        </div>
+    </div><!--/.row-->
+
+    <form role="form">
+        <div class="col-md-8">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label>Les types de crédits disponibles :</label>
+                    <select class="form-control" id="produit" >
+                        <option value="-1" disabled selected>----------------------- Choisir -----------------------</option>
+                        {% for p in produit %}
+                            <option value="{{ p.IdProduit }}" >{{ p.NomProduit }}</option>
+                        {% endfor %}
+                    </select>
+                    <small id="error_produit" class="text-danger"></small>
                 </div>
             </div>
-        </div><!-- /.col-->
-    </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label>La methode de calcule :</label>
+                    <select class="form-control" id="methode_calcule">
+                        <option value="-1"  disabled selected>----------------------- Choisir -----------------------</option>
+                        <option value="1">Montant Totale de Crédit</option>
+                        <option value="2">Duree de Crédit</option>
+                        <option value="3">Echeance de Crédit</option>
+                    </select>
+                    <small id="error_methode_calcule" class="text-danger"></small>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <br>
+                <button type="button" class="btn btn-primary" id="simuler" >Simuler</button>
+            </div>
+        </div>
+        <div class="col-md-8" >
+            <div class="panel panel-default" style="visibility:hidden">
+                <div class="panel-heading">Veuillez renseigner les détailles du crédit</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Valeur du crédit</label>
+                                <input type="number" class="form-control" placeholder="La valeur du crédit" id="valeur_credit"/>
+                                <small id="error_valeur_credit" class="text-danger">
 
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Duree du crédit</label>
+                                <input type="number" class="form-control" placeholder="La durée du crédit" id="duree_credit">
+                                <small id="error_duree_credit" class="text-danger">
 
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label> Montant de l'echéance</label>
+                                <input type="number" class="form-control" placeholder="Le montant de l'échéance" id="montant_echeance">
+                                <small id="eroor_montant_echeance" class="text-danger">
 
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Le taux d'interêt du crédit</label>
+                                <input type="number" class="form-control" placeholder="Le taux d'interêt du crédit" id="taux_interet">
+                                <small id="error_taux_interet" class="text-danger">
 
-{% endblock %}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-6" align="center">
+                            <button type="button" class="btn btn-primary">Calculer Echeancier</button>
+                            <button type="reset" class="btn btn-default">Réinitialiser les valeurs</button>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+</body>
+</html>

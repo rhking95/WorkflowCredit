@@ -90,6 +90,52 @@ class Produit
     private $tauxIntProdMin;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="DureeProdMax", type="integer")
+     */
+    private $dureeProdMax;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="DureeProdMin", type="integer")
+     */
+    private $dureeProdMin;
+
+    /**
+     * @return int
+     */
+    public function getDureeProdMax()
+    {
+        return $this->dureeProdMax;
+    }
+
+    /**
+     * @param int $dureeProdMax
+     */
+    public function setDureeProdMax($dureeProdMax)
+    {
+        $this->dureeProdMax = $dureeProdMax;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDureeProdMin()
+    {
+        return $this->dureeProdMin;
+    }
+
+    /**
+     * @param int $dureeProdMin
+     */
+    public function setDureeProdMin($dureeProdMin)
+    {
+        $this->dureeProdMin = $dureeProdMin;
+    }
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="DateCreationProduit", type="date")
