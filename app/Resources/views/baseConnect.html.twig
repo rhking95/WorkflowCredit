@@ -31,6 +31,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid" >
             <div class="navbar-header">
+
                 <a class="navbar-brand"><span>| Crédit workflow |</span>| Rejoignez-nous |</a>
                 <ul class="user-menu">
                     <div class="col-lg-5">
@@ -59,11 +60,19 @@
         <ul class="nav menu">
             <li role="presentation" class="divider"></li>
             <li class="parent ">
+                <a href="{{ path('Connect_Client') }}">
+                    <span data-toggle="collapse" href="#sub-item-1">
+                        <svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg>
+                    </span>Acceuil
+                </a>
+            </li>
+            <li role="presentation" class="divider"></li>
+            <li class="parent ">
                 <a href="{{ path('Ajouter_Credit') }}">
                     <span data-toggle="collapse" href="#sub-item-1">
                         <svg class="glyph stroked chevron-down">
                             <use xlink:href="#stroked-chevron-down"></use>
-                        </svg></span>Nos crédits
+                        </svg></span>Simulation de crédit
                 </a>
             </li>
             <li role="presentation" class="divider"></li>
