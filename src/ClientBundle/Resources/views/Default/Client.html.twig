@@ -1,49 +1,67 @@
-<head>
-<title>Creation Client</title>
+{% extends 'base.html.twig'%}
+{% block content %}
+    <head>
+        <title>Creation Client</title>
 
 
-</head>
-<body>
-<table width="80%" height = "80%">
-    <tr>
-        <td align="center">
-            <h1 align=> Creation Client</h1>
-            {{ form_start(form)}}
-            <table>
-            <tr>
-                <td>Nom</td>
-                <td>{{ form_widget(form.nomCli) }}</td>
-            </tr>
-            <tr>
-                <td>Prenom</td>
-                <td>{{ form_widget(form.prenomCli) }}</td>
-            </tr>
-            <tr>
-                <td>Date Naissace</td>
-                <td>{{ form_widget(form.dateNaiCli) }}</td>
-            </tr>
-            <tr>
-                <td>Login</td>
-                <td>{{ form_widget(form.login) }}</td>
-                <td>{{error1}}</td>
-            </tr>
-            <tr>
-                <td>Passowrd</td>
-                 <td>{{ form_widget(form.password) }}</td>
-            </tr>
-            <tr>
-                <td>Confirmation Password</td>
-                <td><input type="password" name="confpas"></td>
-                <td>{{ error2 }}</td>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="submit" value="Creation"></td>
-            </tr>
-     </table>
-    {{ form_end(form)}}
-     </td>
+    </head>
+    <body>
+    <form name="f" action="{{ path('Add_Client') }}">
+        {{ form_start(form)}}
+    <table width="100%" height = "80%">
+        <tr>
+            <td align="center">
+                <table>
+                    <tr>
+                        <td colspan="1"><h1 class="page-header"> Creation Client</h1></td>
+                    </tr>
+                    <tr>
+                        <div class="form-group">
+                            <td> <label>Nom</label></td>
+                            <td>{{ form_widget(form.nomCli,{ 'attr': {'class': 'form-control','placeholder':'Nom'} }) }}</td>
+                        </div>
+                    </tr>
+                    <tr>
+                        <div class="form-group">
+                            <td> <label>Prenom</label></td>
+                            <td>{{ form_widget(form.prenomCli,{ 'attr': {'class': 'form-control','placeholder':'Prenom'} }) }}</td>
+                        </div>
+                    </tr>
+                    <tr>
+                        <div class="form-group">
+                            <td><label>Date Naissace</label></td>
+                            <td>{{ form_widget(form.dateNaiCli,{ 'attr': {'class': 'form-control','type':'date'} }) }}</td>
+                        </div>
+                    </tr>
+                    <tr>
+                        <div class="form-group">
+                            <td> <label>S'identifier</label></td>
+                            <td>{{ form_widget(form.login,{ 'attr': {'class': 'form-control','placeholder':'S identifier'} }) }}</td>
+                        </div>
+                    </tr>
+                    <tr>
+                        <div class="form-group">
+                            <td> <label>mot de passe</label></td>
+                            <td>{{ form_widget(form.password,{ 'attr': {'class': 'form-control','placeholder':'Mot de passe'} }) }}</td>
+                        </div>
+                    </tr>
+                    <tr>
+                        <div class="form-group">
+                            <td> <label>Confirmation mot de passe</label></td>
+                            <td><input class="form-control" type="password" name="confpas" placeholder="Confirmation mot de passe"></td>
+                        </div>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            {{ form_widget(form.Valider,{ 'attr': {'class': 'btn btn-primary','value':'Valider'} }) }}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+        {{ form_end(form)}}
 
-    </tr>
-</table>
-
-</body>
+    </form>
+    </body>
+{% endblock %}
