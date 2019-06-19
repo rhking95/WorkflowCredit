@@ -1,18 +1,22 @@
-{% extends 'baseconnect.html.twig'%}
+{% extends 'baseConnect.html.twig' %}
 {% block content %}
-    <head>
-        <title>Creation Client</title>
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <ol class="breadcrumb">
+            <li><a href="#"><svg class="glyph stroked male-user">
+                        <use xlink:href="#stroked-male-user"></use>
+                    </svg>
+                </a>
+            </li>
+            <li class="active">S'inscrire</li>
+        </ol>
 
-
-    </head>
-    <body>
-        {{ form_start(form)}}
-    <table width="100%" height = "80%">
+    {{ form_start(form)}}
+    <table align="center">
         <tr>
             <td align="center">
                 <table>
                     <tr>
-                        <td colspan="1"><h1 class="page-header"> Creation Client</h1></td>
+                        <td colspan="2"><h2 class="page-header"> Veuillez remplir votre formulaire d'inscription</h2></td>
                     </tr>
                     <tr>
                         <div class="form-group">
@@ -59,7 +63,7 @@
                         <td><font color="red"> {{ error2 }}</font></td>
                     </tr>
                     <tr>
-                        <td colspan="2">
+                        <td colspan="2" align="right">
                             {{ form_widget(form.Valider,{ 'attr': {'class': 'btn btn-primary','value':'Valider'} }) }}
                         </td>
                     </tr>
@@ -67,7 +71,7 @@
             </td>
         </tr>
     </table>
-        {{ form_end(form)}}
+    </div>
 
-    </body>
+    {{ form_end(form)}}
 {% endblock %}
