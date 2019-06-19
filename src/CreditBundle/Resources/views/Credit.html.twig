@@ -1,20 +1,24 @@
-<!DOCTYPE html>
+{% extends 'baseconnect.html.twig'%}
+{% block content %}
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Crédit</title>
+    <title>Demande de crédit</title>
 
-    <link href="{{ asset('templates/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('templates/css/datepicker3.css') }}" rel="stylesheet">
-    <link href="{{ asset('templates/css/styles.css') }}" rel="stylesheet">
-
-    <!--Icons-->
     <script src="{{ asset('templates/js/jquery-3.4.1.min.js')}}"></script>
 
-    <script type="text/javascript">
+    <script>
+
         jQuery(function($) {
             $('#simuler').click(function (e) {
+
+                $("#error_duree_credit").text('');
+                $("#error_valeur_credit").text('');
+                $("#error_taux_interet").text('');
+                $("#duree_credit").val(0);
+                $("#valeur_credit").val(0);
+                $("#taux_interet").val(0);
+                $("#montant_echeance").val(0);
+
                 if ($("#produit option:selected").val() == -1) {
                     $("#error_produit").text($("#error_produit").val().replace('', 'Veuillez choisir le type de crédit'));
                 } else {
@@ -42,21 +46,145 @@
                     $("#montant_echeance").prop('disabled', true);
                 }
                 {% for p in produit %}
-                if ($("#produit option:selected").val()=={{ p.IdProduit }})
-                    $("#error_valeur_credit").text($("#error_valeur_credit").val().replace('', 'La valeur de crédit doit être entre ' +{{ p.MantantProdMax}} +' et '+ {{ p.MantantProdMin}}));
-                $("#error_duree_credit").text($("#error_duree_credit").val().replace('', 'La duree de crédit doit être entre ' +{{ p.DureeProdMax}} +' et '+ {{ p.DureeProdMin}}));
-                $("#error_taux_interet").text($("#error_taux_interet").val().replace('', 'Le taux d\'intérêt de crédit doit être entre ' +{{ p.TauxIntProdMax}} +' et '+ {{ p.TauxIntProdMin}}));
+                if ($("#produit option:selected").val()=={{ p.IdProduit }}) {
+                    $("#TauxIntProdMax").val({{ p.TauxIntProdMax }});
+                    $("#TauxIntProdMin").val({{ p.TauxIntProdMin }});
+                    $("#MantantProdMax").val({{ p.MantantProdMax }});
+                    $("#MantantProdMin").val({{ p.MantantProdMin }});
+                    $("#DureeProdMax").val({{ p.DureeProdMax }});
+                    $("#DureeProdMin").val({{ p.DureeProdMin }});
+                    $("#typec").val($("#methode_calcule option:selected").val());
+                    if (($('#typec').val()==1)){
+                        $("#error_duree_credit").text($("#error_duree_credit").val().replace('', 'La duree de crédit doit être entre ' +{{ p.DureeProdMin }} +' et ' + {{ p.DureeProdMax }}));
+                    }
+                    if (($('#typec').val()==2)){
+                        $("#error_valeur_credit").text($("#error_valeur_credit").val().replace('', 'La valeur de crédit doit être entre ' +{{ p.MantantProdMin }} +' et ' + {{ p.MantantProdMax }}));
+                    }
+                    if (($('#typec').val()==3)){
+                        $("#error_duree_credit").text($("#error_duree_credit").val().replace('', 'La duree de crédit doit être entre ' +{{ p.DureeProdMin }} +' et ' + {{ p.DureeProdMax }}));
+                        $("#error_valeur_credit").text($("#error_valeur_credit").val().replace('', 'La valeur de crédit doit être entre ' +{{ p.MantantProdMin }} +' et ' + {{ p.MantantProdMax }}));
+                    }
+                    $("#error_taux_interet").text($("#error_taux_interet").val().replace('', 'Le taux d\'intérêt de crédit doit être entre ' +{{ p.TauxIntProdMin }} +' et ' + {{ p.TauxIntProdMax }}));
+                }
                 {% endfor %}
 
+            });
+            $('#calculer').click(function (e) {
+                var p=0;
+                var liste=0;
+                var mc=0;
+                var dc=0;
+                var ic=0;
+                if ($("#produit option:selected").val() == -1) {
+                    $("#error_produit").text($("#error_produit").val().replace('', 'Veuillez choisir le type de crédit'));
+                    p=1;
+                }
+                else{
+                    $("#error_produit").text($("#error_produit").val().replace('Veuillez choisir le type de crédit', ''));
+                }
+                if ($("#methode_calcule option:selected").val() == -1) {
+                    $("#error_methode_calcule").text($("#error_methode_calcule").val().replace('', 'Veuillez choisir la methode de calcule'));
+                    liste=1;
+                }else {
+                    $("#error_methode_calcule").text($("#error_methode_calcule").val().replace('Veuillez choisir la methode de calcule', ''));
+                }
+
+                if (($('#valeur_credit').val() > $('#MantantProdMax').val())||($('#valeur_credit').val() < $('#MantantProdMin').val())&&($('#typec').val()!=1)){
+                    $("#error_valeur_credit").text("Vérifier le montant du crédit qui doit être entre "+$('#MantantProdMin').val()+" et "+$('#MantantProdMax').val());
+                    mc=1;
+                }else{
+                    $("#error_valeur_credit").text('');
+                }
+                if (($('#duree_credit').val() > $('#DureeProdMax').val())||($('#duree_credit').val() < $('#DureeProdMin').val())&&($('#typec').val()!=2)){
+                    $("#error_duree_credit").text("Vérifier la durée du crédit qui doit être entre "+$('#DureeProdMin').val()+" et "+$('#DureeProdMax').val());
+                    dc=1;
+                }else{
+                    $("#error_duree_credit").text('');
+                }
+                if (($('#taux_interet').val() > $('#TauxIntProdMax').val())||($('#taux_interet').val() < $('#TauxIntProdMin').val())){
+                    $("#error_taux_interet").text("Vérifier le taux d'\intérêt du crédit qui doit être entre "+$('#TauxIntProdMin').val()+" et "+$('#TauxIntProdMax').val());
+                    ic=1;
+                }else{
+                    $("#error_taux_interet").text('');
+                }
+                if ((p==0)&&(liste==0)&&(mc==0)&&(dc==0)&&(ic==0)){
+                    if (($('#typec').val()==1)){
+                        $('#valeur_credit').val((($('#montant_echeance').val()*$('#duree_credit').val())/(1+($('#taux_interet').val()/100))).toFixed(3));
+                        if (($('#valeur_credit').val() > $('#MantantProdMax').val())||($('#valeur_credit').val() < $('#MantantProdMin').val())){
+                            $("#error_valeur_credit").text("Vérifier le montant du crédit qui doit être entre "+$('#MantantProdMin').val()+" et "+$('#MantantProdMax').val());
+                        }else{
+                            $("#error_valeur_credit").text('');
+                        }
+                    }
+                    if (($('#typec').val()==2)){
+                        $("#duree_credit").val(($('#valeur_credit').val()*(1+($('#taux_interet').val()*0.01))/$('#montant_echeance').val()).toFixed(2));
+                        if (($('#duree_credit').val() > $('#DureeProdMax').val())||($('#duree_credit').val() < $('#DureeProdMin').val())){
+                            $("#error_duree_credit").text("Vérifier la durée du crédit qui doit être entre "+$('#DureeProdMin').val()+" et "+$('#DureeProdMax').val());
+                        }else{
+                            $("#error_duree_credit").text('');
+                        }
+                    }
+                    if (($('#typec').val()==3)){
+                        $("#montant_echeance").val(($('#valeur_credit').val()*(1+($('#taux_interet').val()*0.01))/$("#duree_credit").val()).toFixed(3));
+                    }
+                    $("#calculer_echeancier").prop('disabled', false);
+                }
+                $("#calculer_echancier").prop('disabled', false);
 
             });
+            $('#calculer_echancier').click(function () {
+                $("#echancier").prop('hidden', false);
+                $("#titre_table_echancier").prop('hidden', false);
+                $("#echancier > tbody").text("");
+
+                var date = new Date();
+                var jour = date.getDate();
+                var mois = parseInt(date.getMonth()+1);
+                var annee = date.getFullYear();
+                var totale_echeance = $('#montant_echeance').val();
+                var principale = $('#valeur_credit').val()/$("#duree_credit").val();
+                var interet = principale*($('#taux_interet').val()*0.01);
+                var balance = $('#valeur_credit').val();
+                var nb=0;
+
+                while (parseInt(balance) >= 0){
+                    nb++;
+                    mois = parseInt(mois+1);
+                    if (parseInt(mois)==parseInt(13)){
+                        mois=parseInt(1);
+                        annee=parseInt(annee+1);
+                    }
+                    balance=balance-principale;
+                    $("#echancier > tbody").append(
+                        "<tr>" +
+                        "<td align='center'>"+String(nb)+"</td>"+
+                        "<td align='center'>"+String(jour)+"/"+String(mois)+"/"+String(annee)+"</td>"+
+                        "<td align='center'>"+String(parseFloat(totale_echeance).toFixed(3))+"</td>"+
+                        "<td align='center'>"+String(parseFloat(principale).toFixed(3))+"</td>"+
+                        "<td align='center'>"+String(parseFloat(interet).toFixed(3))+"</td>"+
+                        "<td align='center'>"+String(parseFloat(balance).toFixed(3))+"</td>"+
+                        "</tr>"
+                    );
+                }
+                $("#echancier > tbody").append(
+                    "<tr>" +
+                    "<th><div class='th-inner' align='center'>Totale</div></th>"+
+                    "<th><div class='th-inner' align='center'></div></th>"+
+                    "<th><div class='th-inner' align='center'>"+(String(parseFloat($('#valeur_credit').val()*(1+($('#taux_interet').val()*0.01))).toFixed(3)))+"</div></th>"+
+                    "<th><div class='th-inner' align='center'>"+String(parseFloat($('#valeur_credit').val()).toFixed(3))+"</div></th>"+
+                    "<th><div class='th-inner' align='center'>"+String(parseFloat($('#valeur_credit').val()*($('#taux_interet').val()*0.01)).toFixed(3))+"</div></th>"+
+                    "<th><div class='th-inner' align='center'></div></th>"+
+                    "</tr>"
+                );
+
+            })
         });
+
     </script>
 
 </head>
 
 <body>
-
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
         <div class="col-lg-12">
@@ -95,6 +223,13 @@
                 <button type="button" class="btn btn-primary" id="simuler" >Simuler</button>
             </div>
         </div>
+        <input type="text" id="TauxIntProdMax" hidden/>
+        <input type="text" id="TauxIntProdMin" hidden/>
+        <input type="text" id="MantantProdMax" hidden/>
+        <input type="text" id="MantantProdMin" hidden/>
+        <input type="text" id="DureeProdMax" hidden/>
+        <input type="text" id="DureeProdMin" hidden/>
+        <input type="text" id="typec" hidden/>
         <div class="col-md-8" >
             <div class="panel panel-default" style="visibility:hidden">
                 <div class="panel-heading">Veuillez renseigner les détailles du crédit</div>
@@ -103,19 +238,15 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Valeur du crédit</label>
-                                <input type="number" class="form-control" placeholder="La valeur du crédit" id="valeur_credit"/>
-                                <small id="error_valeur_credit" class="text-danger">
-
-                                </small>
+                                <input type="number" class="form-control" placeholder="La valeur du crédit" id="valeur_credit">
+                                <small id="error_valeur_credit" class="text-danger"></small>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Duree du crédit</label>
                                 <input type="number" class="form-control" placeholder="La durée du crédit" id="duree_credit">
-                                <small id="error_duree_credit" class="text-danger">
-
-                                </small>
+                                <small id="error_duree_credit" class="text-danger"></small>
                             </div>
                         </div>
                     </div>
@@ -124,37 +255,55 @@
                             <div class="form-group">
                                 <label> Montant de l'echéance</label>
                                 <input type="number" class="form-control" placeholder="Le montant de l'échéance" id="montant_echeance">
-                                <small id="eroor_montant_echeance" class="text-danger">
-
-                                </small>
+                                <small id="eroor_montant_echeance" class="text-danger"></small>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Le taux d'interêt du crédit</label>
                                 <input type="number" class="form-control" placeholder="Le taux d'interêt du crédit" id="taux_interet">
-                                <small id="error_taux_interet" class="text-danger">
-
-                                </small>
+                                <small id="error_taux_interet" class="text-danger"></small>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">
-                        </div>
-                        <div class="col-md-6" align="center">
-                            <button type="button" class="btn btn-primary">Calculer Echeancier</button>
+                        <div class="col-md-12" align="center">
+                            <button type="button" class="btn btn-primary" id="calculer">Calculer</button>
                             <button type="reset" class="btn btn-default">Réinitialiser les valeurs</button>
+                            <button type="button" class="btn btn-primary" id="calculer_echancier" disabled>Génerer Echeancier</button>
                         </div>
-                        <div class="col-md-3">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" align="center" id="titre_table_echancier" hidden>Echeancier de remboursement</div>
+                                <div class="panel-body">
+                                    <table class="table table-hover" id="echancier" hidden>
+                                        <thead>
+                                        <tr>
+                                            <th><div class="th-inner" align="center">Numéro échéance</div></th>
+                                            <th><div class="th-inner" align="center">Date de l'échéance</div></th>
+                                            <th><div class="th-inner" align="center">Totale échéance</div></th>
+                                            <th><div class="th-inner" align="center">Principale</div></th>
+                                            <th><div class="th-inner" align="center">Intérêt</div></th>
+                                            <th><div class="th-inner" align="center">Balance</div></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </form>
 
 </div>
 
 </body>
 </html>
+{% endblock %}
