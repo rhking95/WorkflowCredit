@@ -1,0 +1,228 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <ol class="breadcrumb">
+            <li><a href="#">
+                    <svg class="glyph stroked male-user">
+                        <use xlink:href="#stroked-male-user"></use>
+                    </svg>
+                </a>
+            </li>
+            <li class="active">Clients en attente de validation</li>
+        </ol>
+        <div class="col-lg-12">
+            <h2></h2>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-toolbar">
+                            <div class="columns btn-group pull-right">
+                                <a href="{{ path('client_homepage') }}" class="btn btn-primary">OK</a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><label><input type="checkbox" data-field="id" value="1" checked="checked">
+                                            ID
+                                        </label></li>
+                                    <li><label><input type="checkbox" data-field="name" value="2" checked="checked">
+                                            Nom
+                                        </label></li>
+                                    <li><label><input type="checkbox" data-field="price" value="3" checked="checked">
+                                            Prénom
+                                        </label></li>
+                                    <li><label><input type="checkbox" data-field="price" value="3" checked="checked">
+                                            Date de naissance
+                                        </label></li>
+                                </ul>
+                            </div>
+                            <div class="pull-right search"><input class="form-control" type="text"
+                                                                  placeholder="Recherche">
+                            </div>
+                        </div>
+                        <div class="fixed-table-container">
+
+                            <div class="fixed-table-loading" style="top: 37px; display: none;">Loading, please
+                                wait…
+                            </div>
+                            <table data-toggle="table" data-url="tables/data1.json" data-show-refresh="true"
+                                   data-show-toggle="true" data-show-columns="true" data-search="true"
+                                   data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name"
+                                   data-sort-order="desc" class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="bs-checkbox " style="width: 36px; ">
+                                        <div class="th-inner "><input name="btSelectAll" type="checkbox"></div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th style="">
+                                        <div class="th-inner sortable">ID</div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th style="">
+                                        <div class="th-inner sortable">Nom<span class="order"><span
+                                                        class="caret" style="margin: 10px 5px;"></span></span></div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th style="">
+                                        <div class="th-inner sortable">Prénom</div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th style="">
+                                        <div class="th-inner sortable">Date de naissance</div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th colspan="2" width="23%"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="no-records-found">
+                                    <td colspan="5">No matching records found</td>
+
+                                    <td>
+                                        <ol class="breadcrumb">
+                                            <li><a href="#" style="color: forestgreen">
+                                                    <svg class="glyph stroked cancel" style="color: forestgreen">
+                                                        <use xlink:href="#stroked-cancel"/>
+                                                    </svg>
+                                                    </span>Valider
+                                                </a>
+                                            </li>
+                                        </ol>
+                                    </td>
+                                    <td>
+                                        <ol class="breadcrumb">
+                                            <li><a href="#" style="color: red">
+                                                    <svg class="glyph stroked cancel" style="color: red">
+                                                        <use xlink:href="#stroked-cancel"/>
+                                                    </svg>
+                                                    </span>Rejeter
+                                                </a>
+                                            </li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <ol class="breadcrumb">
+            <li><a href="#">
+                    <svg class="glyph stroked male-user">
+                        <use xlink:href="#stroked-male-user"></use>
+                    </svg>
+                </a>
+            </li>
+            <li class="active">Mes clients</li>
+        </ol>
+        <div class="col-lg-12">
+            <h2></h2>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-toolbar">
+                            <div class="columns btn-group pull-right">
+                                <a href="{{ path('client_homepage') }}" class="btn btn-primary">OK</a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><label><input type="checkbox" data-field="id" value="1" checked="checked">
+                                            ID
+                                        </label></li>
+                                    <li><label><input type="checkbox" data-field="name" value="2" checked="checked">
+                                            Nom
+                                        </label></li>
+                                    <li><label><input type="checkbox" data-field="price" value="3" checked="checked">
+                                            Prénom
+                                        </label></li>
+                                    <li><label><input type="checkbox" data-field="price" value="3" checked="checked">
+                                            Date de naissance
+                                        </label></li>
+                                </ul>
+                            </div>
+                            <div class="pull-right search"><input class="form-control" type="text"
+                                                                  placeholder="Recherche">
+                            </div>
+                        </div>
+                        <div class="fixed-table-container">
+
+                            <div class="fixed-table-loading" style="top: 37px; display: none;">Loading, please
+                                wait…
+                            </div>
+                            <table data-toggle="table" data-url="tables/data1.json" data-show-refresh="true"
+                                   data-show-toggle="true" data-show-columns="true" data-search="true"
+                                   data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name"
+                                   data-sort-order="desc" class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="bs-checkbox " style="width: 36px; ">
+                                        <div class="th-inner "><input name="btSelectAll" type="checkbox"></div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th style="">
+                                        <div class="th-inner sortable">ID</div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th style="">
+                                        <div class="th-inner sortable">Nom<span class="order"><span
+                                                        class="caret" style="margin: 10px 5px;"></span></span></div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th style="">
+                                        <div class="th-inner sortable">Prénom</div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th style="">
+                                        <div class="th-inner sortable">Date de naissance</div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th colspan="2" width="23%"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="no-records-found">
+                                    <td colspan="5">No matching records found</td>
+
+                                    <td>
+                                        <ol class="breadcrumb">
+                                            <li><a href="#">
+                                                    <svg class="glyph stroked eye">
+                                                        <use xlink:href="#stroked-eye"/>
+                                                    </svg>
+                                                    </span>Consulter
+                                                </a>
+                                            </li>
+                                        </ol>
+                                    </td>
+                                    <td>
+                                        <ol class="breadcrumb">
+                                            <li><a href="#" style="color: red">
+                                                    <svg class="glyph stroked trash" style="color: red">
+                                                        <use xlink:href="#stroked-trash"/>
+                                                    </svg>
+                                                    </span>Archiver
+                                                </a>
+                                            </li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
