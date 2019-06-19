@@ -1,6 +1,6 @@
 client_homepage:
     path:     /home
-    defaults: { _controller: ClientBundle:Default:index }
+    defaults: { _controller: ClientBundle:connect:authentification }
 
 Add_Client:
     path:     /add
@@ -9,3 +9,7 @@ Add_Client:
 Connect_Client:
     path:     /connect
     defaults: { _controller: ClientBundle:connect:connect }
+
+Liste_Client:
+    path:     /liste
+    defaults: { _controller: ClientBundle:connect:listeClients }

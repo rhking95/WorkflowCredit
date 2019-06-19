@@ -5,3 +5,7 @@ credit_homepage:
 Ajouter_Credit:
     path:     /ajouter
     defaults: { _controller: CreditBundle:Credit:Ajout }
+
+Liste_Credit:
+    path:     /liste
+    defaults: { _controller: CreditBundle:Default:listeCredit }

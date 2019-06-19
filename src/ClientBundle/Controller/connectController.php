@@ -13,8 +13,13 @@ class connectController extends Controller
     }
     public function authentificationAction()
     {
-
-
+        return $this->render('@Client/Default/index.html.twig');
     }
+
+    public function listeClientsAction()
+    {
+        return $this->render('@Client/Default/listeClients.html.twig');
+    }
+
 
 }
