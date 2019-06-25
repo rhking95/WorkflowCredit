@@ -87,34 +87,26 @@ class Credit
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="DateCreationCredit", type="date")
+     * @ORM\Column(name="DateCreationCredit", type="datetime")
      */
     private $DateCreationCredit;
 
-
     /**
-     * Set idCredit
-     *
-     * @param integer $idCredit
-     *
-     * @return Credit
-     */
-    public function setIdCredit($idCredit)
-    {
-        $this->idCredit = $idCredit;
-
-        return $this;
-    }
-
-    /**
-     * Get idCredit
-     *
-     * @return int
+     * @return integer
      */
     public function getIdCredit()
     {
         return $this->idCredit;
     }
+
+    /**
+     * @param integer $idCredit
+     */
+    public function setIdCredit($idCredit)
+    {
+        $this->idCredit = $idCredit;
+    }
+
 
     /**
      * Set typeCredit
@@ -213,27 +205,19 @@ class Credit
     }
 
     /**
-     * Set dateCreationCredit
-     *
-     * @param \DateTime $dateCreationCredit
-     *
-     * @return Produit
-     */
-    public function setDateCreationCredit($dateCreationCredit)
-    {
-        $this->DateCreationCredit = $dateCreationCredit;
-
-        return $this;
-    }
-
-    /**
-     * Get dateCreationCredit
-     *
      * @return \DateTime
      */
     public function getDateCreationCredit()
     {
         return $this->DateCreationCredit;
+    }
+
+    /**
+     * @param \DateTime $DateCreationCredit
+     */
+    public function setDateCreationCredit($DateCreationCredit)
+    {
+        $this->DateCreationCredit = $DateCreationCredit;
     }
 }
 

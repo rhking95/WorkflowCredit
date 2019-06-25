@@ -9,3 +9,8 @@ Ajouter_Credit:
 Liste_Credit:
     path:     /liste
     defaults: { _controller: CreditBundle:Default:listeCredit }
+
+ajax_route:
+    path:     /ajouter/ajax_request
+    defaults: { _controller: CreditBundle:Credit:Ajax }
+    methods: [post]

@@ -27,16 +27,19 @@ class Echeancier
      *
      * @ORM\Column(name="TotaleEcheaance", type="float")
      */
-    private $idCredit;
+    private $totaleEcheaance;
+
     /**
      * @ORM\ManyToOne(targetEntity="Credit")
      * @ORM\JoinColumn(name="IdCredit",referencedColumnName="idCredit")
      */
 
-    private $totaleEcheaance;
+    private $idCredit;
 
     /**
-     * @return float
+     * Get IdCredit
+     *
+     * @return \CreditBundle\Entity\Credit
      */
     public function getIdCredit()
     {
@@ -44,12 +47,18 @@ class Echeancier
     }
 
     /**
-     * @param float $idCredit
+     * Set IdCredit
+     *
+     * @param \CreditBundle\Entity\Credit $idCredit
+     *
+     * @return Echeancier
      */
-    public function setIdCredit($idCredit)
+    public function setIdCredit($idCredit = null)
     {
         $this->idCredit = $idCredit;
     }
+
+
 
     /**
      * @var float
@@ -80,7 +89,7 @@ class Echeancier
     private $resteInteretEcheance;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
      * @ORM\Column(name="DateEcheance", type="date")
      */
@@ -241,7 +250,7 @@ class Echeancier
     /**
      * Set dateEcheance
      *
-     * @param \DateTime $dateEcheance
+     * @param \Date $dateEcheance
      *
      * @return Echeancier
      */
@@ -255,7 +264,7 @@ class Echeancier
     /**
      * Get dateEcheance
      *
-     * @return \DateTime
+     * @return \Date
      */
     public function getDateEcheance()
     {
