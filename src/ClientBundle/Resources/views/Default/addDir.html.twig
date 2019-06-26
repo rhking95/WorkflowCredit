@@ -1,0 +1,36 @@
+{% extends 'baseconnect.html.twig'%}
+{% block content %}
+    {{ form_start(form)}}
+    <table align="center">
+    <tr>
+    <td align="center">
+    <table>
+
+    <tr>
+        <div class="form-group">
+            <td> <label>Login</label></td>
+            <td>{{ form_widget(form.login,{ 'attr': {'class': 'form-control','placeholder':'Login'} }) }}</td>
+            <td><font color="red">{{ err2 }}</font></td>
+        </div>
+    </tr>
+    <tr>
+        <div class="form-group">
+            <td> <label>Password</label></td>
+            <td>{{ form_widget(form.passord,{ 'attr': {'class': 'form-control','placeholder':'Password'} }) }}</td>
+        </div>
+    </tr>
+    <tr>
+        <div class="form-group">
+            <td> <label> Confirm Password</label></td>
+            <td><input type="password" name="conf" class="form-control" placeholder="Confirm Password"></td>
+            <td><font color="red"> {{ err1 }}</font></td>
+        </div>
+    </tr>
+    <tr>
+        <td colspan="2">
+            {{ form_widget(form.creer,{ 'attr': {'class': 'btn btn-primary','value':'créer'} }) }}
+        </td>
+    </tr>
+
+    {{ form_end(form)}}
+{% endblock %}

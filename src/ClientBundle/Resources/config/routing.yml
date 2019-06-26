@@ -6,6 +6,13 @@ Add_Client:
     path:     /add
     defaults: { _controller: ClientBundle:Default:add }
 
+Add_Agent:
+    path:     /ajoutAgn
+    defaults: { _controller: ClientBundle:Default:addAgent }
+Add_Directeur:
+    path:     /ajoutDir
+    defaults: { _controller: ClientBundle:Default:addDir }
+
 Connect_Client:
     path:     /connect
     defaults: { _controller: ClientBundle:connect:connect }

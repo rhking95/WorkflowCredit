@@ -24,13 +24,6 @@ class DirecteurAgn
     /**
      * @var string
      *
-     * @ORM\Column(name="iddir", type="string", length=255)
-     */
-    private $iddir;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="login", type="string", length=255)
      */
     private $login;
