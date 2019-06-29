@@ -130,4 +130,44 @@ class DefaultController extends Controller
         $form = $form->createView();
         return $this->render('@Client/Default/addDir.html.twig',array('form'=>$form,'err1'=>$err1,'err2'=>$err2));
     }
+    public function LogAgentAction (){
+        return $this->render('@Client/Default/logAgent.html.twig',array('err3'=>''));
+    }
+
+    public function checkAgentAction(Request $req)
+    {
+        $login = $req->get("login");
+        $password = $req->get("password");
+        $err3 = "";
+        $Agent = $this->getDoctrine()->getRepository
+        (AgentCredit::class)->findBy(array('login' => $login, 'password' => $password));
+        if ($Agent == null) {
+            $err3 = "veillez vérifier votre Login / Mot de passe";
+            return $this->render('@Client/Default/logAgent.html.twig',array('err3'=>$err3));
+        } else {
+            return $this->render('baseConnect.html.twig');
+
+        }
+    }
+
+    public function LogDirAction (){
+        return $this->render('@Client/Default/logDir.html.twig',array('err3'=>''));
+    }
+
+    public function checkDirAction(Request $req)
+    {
+        $login = $req->get("login");
+        $password = $req->get("password");
+        $err3 = "";
+        $Directeur = $this->getDoctrine()->getRepository
+        (DirecteurAgn::class)->findBy(array('login' => $login, 'passord' => $password));
+
+        if ($Directeur == null) {
+            $err3 = "veillez vérifier votre Login / Mot de passe";
+            return $this->render('@Client/Default/logDir.html.twig',array('err3'=>$err3));
+        } else {
+            return $this->render('baseConnect.html.twig');
+
+        }
+    }
 }

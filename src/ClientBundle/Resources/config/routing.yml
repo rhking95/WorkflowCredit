@@ -9,9 +9,26 @@ Add_Client:
 Add_Agent:
     path:     /ajoutAgn
     defaults: { _controller: ClientBundle:Default:addAgent }
+
+login_Agent:
+    path:     /logagent
+    defaults: { _controller: ClientBundle:Default:LogAgent }
+
+check_Agent:
+    path:     /checkagnet
+    defaults: { _controller: ClientBundle:Default:checkAgent }
+
 Add_Directeur:
     path:     /ajoutDir
     defaults: { _controller: ClientBundle:Default:addDir }
+
+login_Directeur:
+    path:     /logdir
+    defaults: { _controller: ClientBundle:Default:LogDir }
+
+check_Directeur:
+    path:     /checkdir
+    defaults: { _controller: ClientBundle:Default:checkDir }
 
 Connect_Client:
     path:     /connect
