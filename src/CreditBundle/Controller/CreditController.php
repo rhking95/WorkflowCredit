@@ -2,8 +2,10 @@
 
 namespace CreditBundle\Controller;
 
+use ClientBundle\Entity\Client;
 use CreditBundle\Entity\Credit;
 use CreditBundle\Entity\Echeancier;
+use CreditBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,15 +26,25 @@ class CreditController extends Controller
         $duree_credit = $request->request->get('duree_credit');
         $taux_interet = $request->request->get('taux_interet');
         $montant_echeance = $request->request->get('montant_echeance');
+        $productid = $request->request->get('productid');
+        $em=$this->getDoctrine()->getManager();
 
-        $credit->setTypeCredit(1);
+        $client = new Client();
+        $client=$em->getRepository('ClientBundle:Client')->find(2);
+
+        $produuit = new Produit();
+        $produuit=$em->getRepository('CreditBundle:Produit')->find($productid);
+
         $credit->setMontantCredit($valeur_credit);
         $credit->setDureeCredit($duree_credit);
         $credit->setInteretCredit($taux_interet);
         $credit->setDateCreationCredit(new \DateTime("now"));
-        $credit->setIdClient(1);
+        $credit->setIdClient($client);
+        $credit->setIdProduit($produuit);
+        $credit->setEtatCredit(1);
+        $credit->setApprouveAgent(0);
+        $credit->setApprouveDirecteur(0);
 
-        $em = $this->getDoctrine()->getManager();
         $em->persist($credit);
         $em->flush();
 
@@ -43,7 +55,7 @@ class CreditController extends Controller
         $balance = round($valeur_credit,3);
         $idCredit = $em->getRepository('CreditBundle:Credit')->getCreditID();
         $credit->setIdCredit($idCredit[1]);
-        while ($balance>=0){
+        while ($balance>1){
             $date = date( "Y-m-d", strtotime("+1 month",strtotime($date)));
             $echeancier = new Echeancier();
             $balance =$balance-$principale;
@@ -61,7 +73,7 @@ class CreditController extends Controller
         $em1->flush();
 
         $response = new Response(json_encode(array(
-            'confirmation' => '/test/web/app_dev.php/credit/liste'
+            'confirmation' => '/WorkflowCredit/web/app_dev.php/credit/liste'
         )));
         $response->headers->set('Content-Type', 'application/json');
 
