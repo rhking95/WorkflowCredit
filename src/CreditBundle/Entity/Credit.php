@@ -23,45 +23,37 @@ class Credit
     private $idCredit;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="typeCredit", type="integer")
-     */
-    private $typeCredit;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Produit")
-     * @ORM\JoinColumn(name="typeCredit",referencedColumnName="IdProduit")
+     * @ORM\JoinColumn(name="idProduit",referencedColumnName="IdProduit")
      */
+    private $idProduit;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="idClient", type="integer")
+     * @ORM\ManyToOne(targetEntity="\ClientBundle\Entity\Client")
+     * @ORM\JoinColumn(name="idClient",referencedColumnName="idCli")
      */
     private $idClient;
 
     /**
-     * @return int
+     * Get IdClient
+     *
+     * @return \ClientBundle\Entity\Client
      */
-    public function getIdClient()
+    public function getIdClienrt()
     {
         return $this->idClient;
     }
 
     /**
-     * @param int $idClient
+     * Set IdClient
+     *
+     * @param \ClientBundle\Entity\Client $idClient
+     *
+     * @return Credit
      */
-    public function setIdClient($idClient)
-    {
-        $this->idClient = $idClient;
+    public function setIdClient($idclient = null){
+        $this->idClient = $idclient;
     }
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Client")
-     * @ORM\JoinColumn(name="idClient",referencedColumnName="idClient")
-     */
-
 
     /**
      * @var float
@@ -92,6 +84,29 @@ class Credit
     private $DateCreationCredit;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="EtatCredit", type="integer")
+     */
+    private $etatCredit;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="ApprouveAgent", type="integer")
+     */
+    private $approuveAgent;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="ApprouveDirecteur", type="integer")
+     */
+    private $approuveDirecteur;
+
+
+
+    /**
      * @return integer
      */
     public function getIdCredit()
@@ -105,31 +120,6 @@ class Credit
     public function setIdCredit($idCredit)
     {
         $this->idCredit = $idCredit;
-    }
-
-
-    /**
-     * Set typeCredit
-     *
-     * @param integer $typeCredit
-     *
-     * @return Credit
-     */
-    public function setTypeCredit($typeCredit)
-    {
-        $this->typeCredit = $typeCredit;
-
-        return $this;
-    }
-
-    /**
-     * Get typeCredit
-     *
-     * @return int
-     */
-    public function getTypeCredit()
-    {
-        return $this->typeCredit;
     }
 
     /**
@@ -219,5 +209,76 @@ class Credit
     {
         $this->DateCreationCredit = $DateCreationCredit;
     }
+
+    /**Get IdProduit
+     *
+     * @return \CreditBundle\Entity\Produit
+     */
+    public function getIdProduit()
+    {
+        return $this->idProduit;
+    }
+
+    /**
+     * Set IdProduit
+     *
+     * @param \CreditBundle\Entity\Produit $idProduit
+     *
+     * @return Credit
+     */
+    public function setIdProduit($idProduit = null)
+    {
+        $this->idProduit = $idProduit;
+    }
+
+    /**
+     * @return int
+     */
+    public function getEtatCredit()
+    {
+        return $this->etatCredit;
+    }
+
+    /**
+     * @param int $etatCredit
+     */
+    public function setEtatCredit($etatCredit)
+    {
+        $this->etatCredit = $etatCredit;
+    }
+
+    /**
+     * @return int
+     */
+    public function getApprouveAgent()
+    {
+        return $this->approuveAgent;
+    }
+
+    /**
+     * @param int $approuveAgent
+     */
+    public function setApprouveAgent($approuveAgent)
+    {
+        $this->approuveAgent = $approuveAgent;
+    }
+
+    /**
+     * @return int
+     */
+    public function getApprouveDirecteur()
+    {
+        return $this->approuveDirecteur;
+    }
+
+    /**
+     * @param int $approuveDirecteur
+     */
+    public function setApprouveDirecteur($approuveDirecteur)
+    {
+        $this->approuveDirecteur = $approuveDirecteur;
+    }
+
+
 }
 

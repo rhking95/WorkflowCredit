@@ -10,4 +10,10 @@ namespace CreditBundle\Repository;
  */
 class CreditRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getCreditID(){
+        return $this->getEntityManager()->createQuery(
+            "SELECT max(c.idCredit) FROM CreditBundle:Credit c"
+        )
+            ->setMaxResults(1)->getOneOrNullResult();
+    }
 }
