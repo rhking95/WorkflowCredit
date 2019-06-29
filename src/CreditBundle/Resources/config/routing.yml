@@ -10,6 +10,11 @@ Liste_Credit:
     path:     /liste
     defaults: { _controller: CreditBundle:Default:listeCredit }
 
+Liste_Credit_Client:
+    path:     /liste
+    defaults: { _controller: CreditBundle:Default:LstCrediClient }
+
+
 ajax_route:
     path:     /ajouter/ajax_request
     defaults: { _controller: CreditBundle:Credit:Ajax }
