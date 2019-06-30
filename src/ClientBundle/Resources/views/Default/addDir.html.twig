@@ -1,14 +1,15 @@
 {% extends 'baseconnect.html.twig'%}
 {% block content %}
     {{ form_start(form)}}
-    <table align="center">
-    <tr>
-    <td align="center">
-    <table>
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="panel panel-default">
+    <div class="panel-heading">Inscription Chef Agence</div>
 
+    <div class="panel-body">
+     <table>
     <tr>
         <div class="form-group">
-            <td> <label>Login</label></td>
+            <td width="200px"> <label>Login</label></td>
             <td>{{ form_widget(form.login,{ 'attr': {'class': 'form-control','placeholder':'Login'} }) }}</td>
             <td><font color="red">{{ err2 }}</font></td>
         </div>
@@ -31,6 +32,10 @@
             {{ form_widget(form.creer,{ 'attr': {'class': 'btn btn-primary','value':'créer'} }) }}
         </td>
     </tr>
-
+     </table>
+    </div>
+    </div>
+    </div>
+    </table>
     {{ form_end(form)}}
 {% endblock %}
