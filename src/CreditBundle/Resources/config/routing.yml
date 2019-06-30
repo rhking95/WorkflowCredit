@@ -19,3 +19,15 @@ ajax_route:
     path:     /ajouter/ajax_request
     defaults: { _controller: CreditBundle:Credit:Ajax }
     methods: [post]
+
+ApprobationAgent:
+    path:     /approbationagent
+    defaults: { _controller: CreditBundle:Credit:ApprobationAgent }
+
+ApprobationAgent_Confirmer:
+    path:     /approbationagent/Confirmer/{id}
+    defaults: { _controller: CreditBundle:Credit:ConfirmationAgent }
+
+ApprobationAgent_Annuler:
+    path:     /approbationagent/Annuler/{id}
+    defaults: { _controller: CreditBundle:Credit:AnnulerAgent }
