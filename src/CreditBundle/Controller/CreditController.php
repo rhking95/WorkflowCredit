@@ -80,6 +80,46 @@ class CreditController extends Controller
         return $response;
     }
 
+    public function ApprobationAgentAction(){
+        $em=$this->getDoctrine()->getManager();
+        $credit=$em->getRepository("CreditBundle:Credit")->getCreditAgent();
+        $creditap=$em->getRepository("CreditBundle:Credit")->getCreditApprouve();
+        $creditan=$em->getRepository("CreditBundle:Credit")->getCreditAnnule();
 
+        return $this->render('@Credit/ApprobationAgent.html.twig',array("credit"=>$credit,"creditap"=>$creditap,"creditan"=>$creditan));
+    }
 
+    public  function ConfirmationAgentAction($id){
+        $credits = $this->getDoctrine()->getRepository(Credit::class)->findBy(array('idCredit'=>$id));
+        $credit = new Credit();
+        $credit=$credits[0];
+        $credit->setApprouveAgent(1);
+
+        $em= $this->getDoctrine()->getManager();
+        $em->persist($credit);
+        $em->flush();
+
+        $credit=$em->getRepository("CreditBundle:Credit")->getCreditAgent();
+        $creditap=$em->getRepository("CreditBundle:Credit")->getCreditApprouve();
+        $creditan=$em->getRepository("CreditBundle:Credit")->getCreditAnnule();
+
+        return $this->render('@Credit/ApprobationAgent.html.twig',array("credit"=>$credit,"creditap"=>$creditap,"creditan"=>$creditan));
+    }
+
+    public  function AnnulerAgentAction($id){
+        $credits = $this->getDoctrine()->getRepository(Credit::class)->findBy(array('idCredit'=>$id));
+        $credit = new Credit();
+        $credit=$credits[0];
+        $credit->setEtatCredit(0);
+
+        $em= $this->getDoctrine()->getManager();
+        $em->persist($credit);
+        $em->flush();
+
+        $credit=$em->getRepository("CreditBundle:Credit")->getCreditAgent();
+        $creditap=$em->getRepository("CreditBundle:Credit")->getCreditApprouve();
+        $creditan=$em->getRepository("CreditBundle:Credit")->getCreditAnnule();
+
+        return $this->render('@Credit/ApprobationAgent.html.twig',array("credit"=>$credit,"creditap"=>$creditap,"creditan"=>$creditan));
+    }
 }

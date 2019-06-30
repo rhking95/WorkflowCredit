@@ -16,4 +16,37 @@ class CreditRepository extends \Doctrine\ORM\EntityRepository
         )
             ->setMaxResults(1)->getOneOrNullResult();
     }
+
+    public function getCreditAgent()
+    {
+        return $this->getEntityManager()->createQuery(
+            "select cl.nomCli,cl.prenomCli,cr.montantCredit,cr.dureeCredit,cr.interetCredit,p.nomProduit,cr.idCredit
+                    from CreditBundle:Credit cr, ClientBundle:client cl, CreditBundle:produit p
+                    where cl.idCli=cr.idClient and p.idProduit=cr.idProduit
+                    and cr.approuveAgent = 0 and cr.etatCredit=1"
+        )
+            ->getArrayResult();
+    }
+
+    public function getCreditApprouve()
+    {
+        return $this->getEntityManager()->createQuery(
+            "select cl.nomCli,cl.prenomCli,cr.montantCredit,cr.dureeCredit,cr.interetCredit,p.nomProduit,cr.idCredit
+                    from CreditBundle:Credit cr, ClientBundle:client cl, CreditBundle:produit p
+                    where cl.idCli=cr.idClient and p.idProduit=cr.idProduit
+                    and cr.approuveAgent = 1"
+        )
+            ->getArrayResult();
+    }
+
+    public function getCreditAnnule()
+    {
+        return $this->getEntityManager()->createQuery(
+            "select cl.nomCli,cl.prenomCli,cr.montantCredit,cr.dureeCredit,cr.interetCredit,p.nomProduit,cr.idCredit
+                    from CreditBundle:Credit cr, ClientBundle:client cl, CreditBundle:produit p
+                    where cl.idCli=cr.idClient and p.idProduit=cr.idProduit
+                    and cr.etatCredit=0"
+        )
+            ->getArrayResult();
+    }
 }

@@ -1,0 +1,215 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <ol class="breadcrumb">
+            <li><a href="#">
+                    <svg class="glyph stroked male-user">
+                        <use xlink:href="#stroked-male-user"></use>
+                    </svg>
+                </a>
+            </li>
+            <li class="active">Crédits en attente de validation</li>
+        </ol>
+        <div class="col-lg-12">
+            <h2></h2>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-container">
+
+                            <table data-toggle="table" data-show-columns="true" data-pagination="true" class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th style="" align="center">
+                                        <div class="th-inner sortable">Client</div>
+                                    </th>
+                                    <th style="" align="center">
+                                        <div class="th-inner sortable">Produit de Prêt</div>
+                                    </th>
+                                    <th style="" align="center">
+                                        <div class="th-inner sortable">Montant du crédit</div>
+                                    </th>
+                                    <th style="" align="center">
+                                        <div class="th-inner sortable">Durée du crédit</div>
+                                    </th>
+                                    <th style="" align="center">
+                                        <div class="th-inner sortable">Taux d'intérêt du crédit</div>
+                                    </th>
+                                    <th style="" align="center">
+                                        <div class="th-inner sortable">Approuver</div>
+                                    </th>
+                                    <th style="" align="center">
+                                        <div class="th-inner sortable">Annuler</div>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    {% for c in credit %}
+
+                                    <td align="center">{{ c.nomCli }} {{ c.prenomCli }}</td>
+                                    <td align="center">{{ c.nomProduit }}</td>
+                                    <td align="center">{{ c.montantCredit }}</td>
+                                    <td align="center">{{ c.dureeCredit }}</td>
+                                    <td align="center">{{ c.interetCredit }}</td>
+                                    <td align="center">
+                                        <ol class="breadcrumb">
+                                            <li><a href="{{ path('ApprobationAgent_Confirmer',{'id':c.idCredit}) }}" style="color: forestgreen">
+                                                    <svg class="glyph stroked cancel" style="color: forestgreen">
+                                                        <use xlink:href="#stroked-cancel"/>
+                                                    </svg>
+                                                    </span>Valider
+                                                </a>
+                                            </li>
+                                        </ol>
+                                    </td>
+                                    <td align="center">
+                                        <ol class="breadcrumb">
+                                            <li><a href="{{ path('ApprobationAgent_Annuler',{'id':c.idCredit}) }}" style="color: red">
+                                                    <svg class="glyph stroked cancel" style="color: red">
+                                                        <use xlink:href="#stroked-cancel"/>
+                                                    </svg>
+                                                    </span>Rejeter
+                                                </a>
+                                            </li>
+                                        </ol>
+                                    </td>
+                                    {% endfor %}
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <ol class="breadcrumb">
+            <li><a href="#">
+                    <svg class="glyph stroked male-user">
+                        <use xlink:href="#stroked-male-user"></use>
+                    </svg>
+                </a>
+            </li>
+            <li class="active">Crédits validés</li>
+        </ol>
+        <div class="col-lg-12">
+            <h2></h2>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-container">
+
+                            <table data-toggle="table" data-show-columns="true" data-pagination="true" class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th style="" align="center">
+                                        <div class="th-inner sortable">Client</div>
+                                    </th>
+                                    <th style="" align="center">
+                                        <div class="th-inner sortable">Produit de Prêt</div>
+                                    </th>
+                                    <th style="" align="center">
+                                        <div class="th-inner sortable">Montant du crédit</div>
+                                    </th>
+                                    <th style="" align="center">
+                                        <div class="th-inner sortable">Durée du crédit</div>
+                                    </th>
+                                    <th style="" align="center">
+                                        <div class="th-inner sortable">Taux d'intérêt du crédit</div>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    {% for cp in creditap %}
+
+                                        <td align="center">{{ cp.nomCli }} {{ cp.prenomCli }}</td>
+                                        <td align="center">{{ cp.nomProduit }}</td>
+                                        <td align="center">{{ cp.montantCredit }}</td>
+                                        <td align="center">{{ cp.dureeCredit }}</td>
+                                        <td align="center">{{ cp.interetCredit }}</td>
+                                    {% endfor %}
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <ol class="breadcrumb">
+            <li><a href="#">
+                    <svg class="glyph stroked male-user">
+                        <use xlink:href="#stroked-male-user"></use>
+                    </svg>
+                </a>
+            </li>
+            <li class="active">Credits annulés</li>
+        </ol>
+        <div class="col-lg-12">
+            <h2></h2>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-container">
+
+                            <table data-toggle="table" data-show-columns="true" data-pagination="true" class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th style="" align="center">
+                                        <div class="th-inner sortable">Client</div>
+                                    </th>
+                                    <th style="" align="center">
+                                        <div class="th-inner sortable">Produit de Prêt</div>
+                                    </th>
+                                    <th style="" align="center">
+                                        <div class="th-inner sortable">Montant du crédit</div>
+                                    </th>
+                                    <th style="" align="center">
+                                        <div class="th-inner sortable">Durée du crédit</div>
+                                    </th>
+                                    <th style="" align="center">
+                                        <div class="th-inner sortable">Taux d'intérêt du crédit</div>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    {% for cn in creditan %}
+
+                                        <td align="center">{{ cn.nomCli }} {{ cn.prenomCli }}</td>
+                                        <td align="center">{{ cn.nomProduit }}</td>
+                                        <td align="center">{{ cn.montantCredit }}</td>
+                                        <td align="center">{{ cn.dureeCredit }}</td>
+                                        <td align="center">{{ cn.interetCredit }}</td>
+                                    {% endfor %}
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
